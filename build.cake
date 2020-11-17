@@ -3,6 +3,7 @@
 #addin nuget:?package=Cake.Git&version=0.22.0
 #addin nuget:?package=Cake.Incubator&version=5.1.0
 #tool dotnet:?package=GitVersion.Tool&version=5.3.7
+#tool nuget:?package=XunitXml.TestLogger&version=2.1.26
 #tool nuget:?package=xunit.runner.console
 
 using System;
@@ -139,11 +140,13 @@ Task("Test")
             Console.WriteLine($"MONGO_X509_CLIENT_CERTIFICATE_PASSWORD={mongoX509ClientCertificatePassword}");
         }
 
+        var testResultsFile = outputDirectory.Combine("test-results").Combine($"TEST-{target.ToLowerInvariant()}-{DateTime.Now.ToLongTimeString()}.xml");
         var settings = new DotNetCoreTestSettings
         {
             NoBuild = true,
             NoRestore = true,
             Configuration = configuration,
+            Logger = $"\"xunit;LogFilePath={testResultsFile}\"",
             ArgumentCustomization = args => args.Append("-- RunConfiguration.TargetPlatform=x64")
         };
         switch (target.ToLowerInvariant())
