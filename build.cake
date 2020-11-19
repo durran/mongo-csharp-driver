@@ -140,7 +140,7 @@ Task("Test")
             Console.WriteLine($"MONGO_X509_CLIENT_CERTIFICATE_PASSWORD={mongoX509ClientCertificatePassword}");
         }
 
-        var testResultsFile = outputDirectory.Combine("test-results").Combine($"TEST-{target.ToLowerInvariant()}-{DateTime.Now.ToLongTimeString()}.xml");
+        var testResultsFile = outputDirectory.Combine("test-results").Combine($"TEST-{target.ToLowerInvariant()}-{DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()}.xml");
         var logger = $"xunit;LogFilePath={testResultsFile}";
         var settings = new DotNetCoreTestSettings
         {

@@ -195,7 +195,7 @@ functions:
   upload-test-results:
     - command: attach.xunit_results
       params:
-        file: ./src/*/build/test-results/*/TEST-*.xml
+        file: ./*/build/test-results/*/TEST-*.xml
 
   bootstrap-mongo-orchestration:
     - command: shell.exec
