@@ -141,14 +141,16 @@ Task("Test")
         }
 
         var testResultsFile = outputDirectory.Combine("test-results").Combine($"TEST-{target.ToLowerInvariant()}-{DateTime.Now.ToLongTimeString()}.xml");
+        var logger = $"xunit;LogFilePath={testResultsFile}";
         var settings = new DotNetCoreTestSettings
         {
             NoBuild = true,
             NoRestore = true,
             Configuration = configuration,
-            Logger = $"\"xunit;LogFilePath={testResultsFile}\"",
+            Logger = logger,
             ArgumentCustomization = args => args.Append("-- RunConfiguration.TargetPlatform=x64")
         };
+        Console.WriteLine(logger);
         switch (target.ToLowerInvariant())
         {
             case "testnet452": settings.Framework = "net452"; break;
