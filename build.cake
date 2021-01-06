@@ -3,7 +3,7 @@
 #addin nuget:?package=Cake.Git&version=0.22.0
 #addin nuget:?package=Cake.Incubator&version=5.1.0
 #tool dotnet:?package=GitVersion.Tool&version=5.3.7
-#tool nuget:?package=XunitXml.TestLogger&version=2.1.26
+#tool nuget:?package=JunitXml.TestLogger&version=2.1.81
 #tool nuget:?package=xunit.runner.console
 
 using System;
@@ -142,7 +142,7 @@ Task("Test")
         }
 
         var testResultsFile = outputDirectory.Combine("test-results").Combine($"TEST-{target.ToLowerInvariant()}-{DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()}.xml");
-        var logger = $"xunit;LogFilePath={testResultsFile}";
+        var logger = $"junit;LogFilePath={testResultsFile}";
         var settings = new DotNetCoreTestSettings
         {
             NoBuild = true,
