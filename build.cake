@@ -142,7 +142,7 @@ Task("Test")
         }
 
         var testResultsFile = outputDirectory.Combine("test-results").Combine($"TEST-{target.ToLowerInvariant()}-{DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()}.xml");
-        var logger = $"junit;LogFilePath={testResultsFile}";
+        var logger = $"junit;LogFilePath={testResultsFile};FailureBodyFormat=Verbose";
         var settings = new DotNetCoreTestSettings
         {
             NoBuild = true,
